@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
+import classnames from "classnames";
 
 import Spinner from "../layouts/Spinner";
 
@@ -47,10 +48,29 @@ class ClientDetails extends Component {
                 </div>
                 <div className="col-md-4 col-sm-6">
                   <h3 className="pull-right">
-                    Balance: ${parseFloat(client.balance).toFixed()}
+                    Balance:{" "}
+                    <span
+                      className={classnames({
+                        "text-danger": client.balance > 0,
+                        "text-success": client.balance === 0
+                      })}
+                    >
+                      {" "}
+                      ${parseFloat(client.balance).toFixed()}{" "}
+                    </span>
                   </h3>
+                  {/* TODO: balance form */}
                 </div>
               </div>
+              <hr />
+              <ul className="list-group">
+                <li className="list-group-item">
+                  Contact Email: {client.email}
+                </li>
+                <li className="list-group-item">
+                  Contact Phone: {client.phone}
+                </li>
+              </ul>
             </div>
           </div>
         </div>
@@ -60,6 +80,10 @@ class ClientDetails extends Component {
     }
   }
 }
+
+ClientDetails.propTypes = {
+  firestore: PropTypes.object.isRequired
+};
 
 export default compose(
   firestoreConnect((props) => [
