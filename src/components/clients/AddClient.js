@@ -9,6 +9,12 @@ class AddClient extends Component {
     phone: "",
     balance: ""
   };
+
+  _onChange = (e) =>
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+
   render() {
     return (
       <div className="row">
@@ -33,6 +39,8 @@ class AddClient extends Component {
                   name="firstName"
                   minLength="2"
                   required
+                  onChange={this._onChange}
+                  value={this.state.firstName}
                 />
               </div>
             </form>
