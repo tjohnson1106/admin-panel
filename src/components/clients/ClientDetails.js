@@ -14,8 +14,49 @@ class ClientDetails extends Component {
     balanceUpdateAmount: ""
   };
 
+  balanceSubmit = (e) => {
+    e.preventDefault();
+
+    console.log(this.state.balanceUpdateAmount);
+  };
+
+  // state changed on entry
+  _onChange = (e) =>
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+
   render() {
     const { client } = this.props;
+    const { showBalanceUpdate, balanceUpdateAmount } = this.state;
+
+    let balanceForm = "";
+
+    // if balance form should display
+    if (showBalanceUpdate) {
+      balanceForm = (
+        <form onSubmit={this.balanceSubmit}>
+          <div className="input-group">
+            <input
+              type="text"
+              className="form-control"
+              name="balanceUpdateAmount"
+              placeholder="Add New Balance"
+              // from state
+              value={balanceUpdateAmount}
+              onChange={this._onChange}
+            />
+            <div className="input-group-append">
+              <input
+                type="text"
+                value="Update"
+                className="btn btn-outline-dark"
+              />
+            </div>
+          </div>
+        </form>
+      );
+    }
 
     if (client) {
       // fetch client
@@ -72,7 +113,7 @@ class ClientDetails extends Component {
                           })
                         }
                       >
-                        <i className="fas fa-pencil-al" />
+                        <i className="fas fa-pencil-alt" />
                       </a>
                     </small>
                   </h3>
