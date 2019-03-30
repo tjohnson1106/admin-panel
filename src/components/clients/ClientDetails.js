@@ -9,6 +9,11 @@ import classnames from "classnames";
 import Spinner from "../layouts/Spinner";
 
 class ClientDetails extends Component {
+  state = {
+    showBalanceUpdate: false,
+    balanceUpdateAmount: ""
+  };
+
   render() {
     const { client } = this.props;
 
@@ -57,7 +62,19 @@ class ClientDetails extends Component {
                     >
                       {" "}
                       ${parseFloat(client.balance).toFixed()}{" "}
-                    </span>
+                    </span>{" "}
+                    <small>
+                      <a
+                        href="#!"
+                        onClick={() =>
+                          this.setState({
+                            showBalanceUpdate: !this.state.showBalanceUpdate
+                          })
+                        }
+                      >
+                        <i className="fas fa-pencil-al" />
+                      </a>
+                    </small>
                   </h3>
                   {/* TODO: balance form */}
                 </div>
