@@ -12,7 +12,88 @@ class EditClient extends Component {
     const { client } = this.props;
 
     if (client) {
-      return <div>{client.firstName}</div>;
+      return (
+        <div>
+          <div className="row">
+            <div className="col-md-6">
+              <Link to="/" className="btn btn-link">
+                <i className="fas fa-arrow-circle-left" />
+                Dashboard
+              </Link>
+            </div>
+          </div>
+
+          <div className="card">
+            <div className="card-header">Edit Client</div>
+
+            <div className="card-body">
+              <form onSubmit={this._onSubmit}>
+                <div className="form-group">
+                  <label htmlFor="firstName">First Name</label>
+                  {/* input -> state */}
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="firstName"
+                    minLength="2"
+                    required
+                    defaultValue={client.firstName}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="lastName">Last Name</label>
+                  {/* input -> state */}
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="lastName"
+                    minLength="2"
+                    required
+                    defaultValue={client.lastName}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="email">Email</label>
+                  {/* input -> state */}
+                  <input
+                    type="email"
+                    className="form-control"
+                    name="email"
+                    defaultValue={client.email}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="phone">Phone</label>
+                  {/* input -> state */}
+                  <input
+                    type="phone"
+                    className="form-control"
+                    name="phone"
+                    minLength="10"
+                    required
+                    defaultValue={client.phone}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="balance">Balance</label>
+                  {/* input -> state */}
+                  <input
+                    type="balance"
+                    className="form-control"
+                    name="balance"
+                    defaultValue={client.balance}
+                  />
+                </div>
+                <input
+                  type="submit"
+                  value="Submit"
+                  className="btn btn-primary btn-block"
+                />
+              </form>
+            </div>
+          </div>
+        </div>
+      );
     } else {
       return <Spinner />;
     }
