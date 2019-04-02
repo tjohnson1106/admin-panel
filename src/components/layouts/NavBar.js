@@ -5,7 +5,7 @@ class NavBar extends Component {
   state = {};
   render() {
     return (
-      <nav className="navbar navbar-expand-md navbar-dark bg-primary mb-4">
+      <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
         <div className="container">
           <Link to="/" className="navbar-brand">
             Client Panel
@@ -21,7 +21,12 @@ class NavBar extends Component {
           </button>
           <div className="collapse navbar-collapse" id="navbarMain">
             <ul className="navbar-nav mr-auto">
-              <li className="nav-item">
+              <li
+                className="nav-item"
+                style={{
+                  fontSize: 22
+                }}
+              >
                 <Link to="/" className="nav-link">
                   Dashboard
                 </Link>
