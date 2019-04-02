@@ -8,6 +8,7 @@ import store from "./store";
 import NavBar from "./components/layouts/NavBar";
 import Dashboard from "./components/layouts/Dashboard";
 import EditClient from "./components/clients/EditClient";
+import AddClient from "./components/clients/AddClient";
 import ClientDetails from "./components/clients/ClientDetails";
 
 import "./App.css";
@@ -23,11 +24,7 @@ class App extends Component {
               <Switch>
                 <Route exact path="/" component={Dashboard} />
                 <Route exact path="/client/add" component={AddClient} />
-                <Route
-                  exact
-                  path="/client/edit/:id"
-                  component={ClientDetails}
-                />
+                <Route exact path="/client/edit/:id" component={EditClient} />
                 <Route exact path="/client/:id" component={ClientDetails} />
               </Switch>
             </div>
