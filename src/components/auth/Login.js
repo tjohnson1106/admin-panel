@@ -6,7 +6,30 @@ import PropTypes from "prop-types";
 import { firebaseConnect } from "react-redux-firebase";
 
 class Login extends Component {
-  state = {};
+  state = {
+    email: "",
+    password: ""
+  };
+
+  _onSubmit = (e) => {
+    e.preventDefault();
+
+    const { firebase } = this.props;
+    const { email, password } = this.state;
+
+    firebase
+      .login({
+        email,
+        password
+      })
+      .catch((err) => alert("Invalid login credentials", err));
+  };
+
+  _onChange = (e) =>
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+
   render() {
     return (
       <div className="row">
@@ -18,6 +41,35 @@ class Login extends Component {
                   <i className="fas fa-lock" /> Login
                 </span>
               </h1>
+              <form onSubmit={this._onSubmit}>
+                <div className="form-group">
+                  <label htmlFor="email">Email</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="email"
+                    required
+                    value={this.state.email}
+                    onChange={this._onChange}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="password">Password</label>
+                  <input
+                    type="password"
+                    className="form-control"
+                    name="password"
+                    required
+                    value={this.state.password}
+                    onChange={this._onChange}
+                  />
+                </div>
+                <input
+                  type="submit"
+                  value="Login"
+                  className="btn btn-primary btn-block"
+                />
+              </form>
             </div>
           </div>
         </div>
