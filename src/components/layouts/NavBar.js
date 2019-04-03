@@ -10,8 +10,9 @@ class NavBar extends Component {
     isAuthenticated: false
   };
 
+  // no this
   static getDerivedStateFromProps(props, state) {
-    const { auth } = this.props;
+    const { auth } = props;
 
     if (auth.uid) {
       return {
@@ -22,7 +23,16 @@ class NavBar extends Component {
     }
   }
 
+  onLogoutClick = (e) => {
+    e.preventDefault();
+
+    const { firebase } = this.props;
+    firebase.logout();
+  };
+
   render() {
+    const { isAuthenticated } = this.state;
+    const { auth } = this.props;
     return (
       <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
         <div className="container">
@@ -40,17 +50,37 @@ class NavBar extends Component {
           </button>
           <div className="collapse navbar-collapse" id="navbarMain">
             <ul className="navbar-nav mr-auto">
-              <li
-                className="nav-item"
-                style={{
-                  fontSize: 22
-                }}
-              >
-                <Link to="/" className="nav-link">
-                  Dashboard
-                </Link>
-              </li>
+              {isAuthenticated ? (
+                <li
+                  className="nav-item"
+                  style={{
+                    fontSize: 22
+                  }}
+                >
+                  <Link to="/" className="nav-link">
+                    Dashboard
+                  </Link>
+                </li>
+              ) : null}
             </ul>
+            {isAuthenticated ? (
+              <ul className="navbar-nav ml-auto">
+                <li className="nav-item">
+                  <a href="#!" className="nav-link">
+                    {auth.email}
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a
+                    href="#!"
+                    className="nav-link"
+                    onClick={this.onLogoutClick}
+                  >
+                    Logout
+                  </a>
+                </li>
+              </ul>
+            ) : null}
           </div>
         </div>
       </nav>
