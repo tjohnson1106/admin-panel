@@ -5,12 +5,13 @@ import { firebaseConnect } from "react-redux-firebase";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
+// import Settings from "../Settings";
+
 class NavBar extends Component {
   state = {
     isAuthenticated: false
   };
 
-  // no this
   static getDerivedStateFromProps(props, state) {
     const { auth } = props;
 
@@ -63,12 +64,18 @@ class NavBar extends Component {
                 </li>
               ) : null}
             </ul>
+            S
             {isAuthenticated ? (
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
                   <a href="#!" className="nav-link">
                     {auth.email}
                   </a>
+                </li>
+                <li className="nav-item">
+                  <Link to="/settings" className="nav-link">
+                    Settings
+                  </Link>
                 </li>
                 <li className="nav-item">
                   <a
@@ -90,12 +97,14 @@ class NavBar extends Component {
 
 NavBar.propTypes = {
   firebase: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  settings: PropTypes.object.isRequired
 };
 
 export default compose(
   firebaseConnect(),
   connect((state, props) => ({
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
+    settings: state.settings
   }))
 )(NavBar);
