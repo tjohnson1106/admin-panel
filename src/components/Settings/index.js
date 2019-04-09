@@ -10,9 +10,22 @@ import {
 } from "../../actions/settingsActions";
 
 class Settings extends Component {
-  setDisableBalanceOnAddChange = () => {
+  disableBalanceOnAddChange = () => {
     const { setDisableBalanceOnAdd } = this.props;
+    // calling action -> toggling state
     setDisableBalanceOnAdd();
+  };
+
+  disableBalanceOnEditChange = () => {
+    const { setDisableBalanceOnEdit } = this.props;
+    // calling action -> toggling state
+    setDisableBalanceOnEdit();
+  };
+
+  allowOnRegistrationChange = () => {
+    const { setAllowRegistration } = this.props;
+    // calling action -> toggling state
+    setAllowRegistration();
   };
 
   render() {
@@ -43,7 +56,7 @@ class Settings extends Component {
                   // checked -> if allowRegistration is set to true
                   // coming from props.settings
                   checked={!!allowRegistration}
-                  onChange={this.allowRegistrationChange}
+                  onChange={this.allowOnRegistrationChange}
                 />
               </div>
               <div className="form-group">
