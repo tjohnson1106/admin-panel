@@ -1,4 +1,13 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+
+import {
+  setAllowRegistration,
+  setDisableBalanceOnAdd,
+  setDisableBalanceOnEdit
+} from "../../actions/settingsActions";
 
 class Settings extends Component {
   state = {};
@@ -11,4 +20,16 @@ class Settings extends Component {
   }
 }
 
-export default Settings;
+// not calling any firestore methods, only need state from auth
+
+export default connect(
+  (state, props) => ({
+    auth: state.firebase.auth,
+    settings: state.settings
+  }),
+  {
+    setAllowRegistration,
+    setDisableBalanceOnAdd,
+    setDisableBalanceOnEdit
+  }
+)(Settings);
