@@ -10,11 +10,65 @@ import {
 } from "../../actions/settingsActions";
 
 class Settings extends Component {
-  state = {};
+  setDisableBalanceOnAddChange = () => {
+    const { setDisableBalanceOnAdd } = this.props;
+    setDisableBalanceOnAdd();
+  };
+
   render() {
+    const {
+      disableBalanceOnAdd,
+      disableBalanceOnEdit,
+      allowRegistration
+    } = this.props.settings;
+
     return (
-      <div className="">
-        <h1>Settings Component</h1>
+      <div className="row">
+        <div className="col-md-6">
+          <Link to="/" className="btn btn-link">
+            <i className="fas arrow-circle-left" />
+            Back to dashboard
+          </Link>
+        </div>
+
+        <div className="card">
+          <div className="card-header" />
+          <div className="card-body">
+            <form>
+              <div className="form-group">
+                <label>Allow Registration</label>{" "}
+                <input
+                  type="checkbox"
+                  name="allowRegistration"
+                  // checked -> if allowRegistration is set to true
+                  // coming from props.settings
+                  checked={!!allowRegistration}
+                  onChange={this.allowRegistrationChange}
+                />
+              </div>
+              <div className="form-group">
+                <label>Disable Balance on Add</label>{" "}
+                <input
+                  type="checkbox"
+                  name="disableBalanceOnAdd"
+                  checked={!!disableBalanceOnAdd}
+                  // coming from props.settings
+                  onChange={this.disableBalanceOnAddChange}
+                />
+              </div>
+              <div className="form-group">
+                <label>Disable Balance on Edit</label>{" "}
+                <input
+                  type="checkbox"
+                  name="disableBalanceOnEdit"
+                  checked={!!disableBalanceOnEdit}
+                  // coming from props.settinisableBalanceOnEditgs
+                  onChange={this.disableBalanceOnEditChange}
+                />
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     );
   }
