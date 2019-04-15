@@ -10,24 +10,24 @@ const initialState = {
   allowRegistration: false
 };
 
-export default function(state = initialState, action) {
+export default function(state = {}, action) {
   switch (action.type) {
     case DISABLE_BALANCE_ON_ADD:
       return {
         ...state,
         // toggle true -> false
-        disableBalanceOnAdd: !state.disableBalanceOnAdd
+        disableBalanceOnAdd: action.payload
       };
     case DISABLE_BALANCE_ON_EDIT:
       return {
         ...state,
-        disableBalanceOnEdit: !state.disableBalanceOnEdit
+        disableBalanceOnEdit: action.payload
       };
 
     case ALLOW_REGISTRATION:
       return {
         ...state,
-        allowRegistration: !state.allowRegistration
+        allowRegistration: action.payload
       };
 
     default:
