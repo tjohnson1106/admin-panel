@@ -8,7 +8,7 @@ import { firebaseConnect } from "react-redux-firebase";
 import { notifyUser } from "../../actions/notifyActions";
 import Alert from "../layouts/Alert";
 
-class Login extends Component {
+class Register extends Component {
   state = {
     email: "",
     password: ""
@@ -20,12 +20,10 @@ class Login extends Component {
     const { firebase, notifyUser } = this.props;
     const { email, password } = this.state;
 
+    // register with firebase
     firebase
-      .login({
-        email,
-        password
-      })
-      .catch((err) => notifyUser("Invalid login credentials", "error", err));
+      .createUser({ email, password })
+      .catch((err) => notifyUser("That user already exists", "error", err));
   };
 
   _onChange = (e) =>
@@ -45,7 +43,7 @@ class Login extends Component {
               ) : null}
               <h1 className="text-center pb-4 pt-3">
                 <span className="text-primary">
-                  <i className="fas fa-lock" /> Login
+                  <i className="fas fa-lock" /> Register
                 </span>
               </h1>
               <form onSubmit={this._onSubmit}>
@@ -85,7 +83,7 @@ class Login extends Component {
   }
 }
 
-Login.propTypes = {
+Register.propTypes = {
   firebase: PropTypes.object.isRequired,
   notify: PropTypes.object.isRequired,
   notifyUser: PropTypes.func.isRequired
@@ -96,11 +94,12 @@ export default compose(
   connect(
     (state, props) => ({
       // recieved from state assigned to props
-      notify: state.notify
+      notify: state.notify,
+      settings: state.settings
     }),
     // action
     {
       notifyUser
     }
   )
-)(Login);
+)(Register);
