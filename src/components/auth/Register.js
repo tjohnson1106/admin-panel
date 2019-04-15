@@ -14,6 +14,14 @@ class Register extends Component {
     password: ""
   };
 
+  componentWillMount() {
+    const { allowRegistration } = this.props.settings;
+
+    if (!allowRegistration) {
+      this.props.history.push("/");
+    }
+  }
+
   _onSubmit = (e) => {
     e.preventDefault();
 
@@ -71,7 +79,7 @@ class Register extends Component {
                 </div>
                 <input
                   type="submit"
-                  value="Login"
+                  value="Register"
                   className="btn btn-primary btn-block"
                 />
               </form>
